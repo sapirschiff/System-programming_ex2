@@ -22,7 +22,7 @@ my_graph: my_graph.o libmy_mat.a
 	$(CC) -o my_graph my_graph.o libmy_mat.a $(CFLAGS)
 
 my_Knapsack: my_Knapsack.o 
-	$(CC) $(CFLAGS) my_Knapsack.o -o my_Knapsack
+	$(CC) -o my_Knapsack my_Knapsack.o $(CFLAGS)
 	
 clean: 
 	rm -f *.o *.a  my_graph my_Knapsack

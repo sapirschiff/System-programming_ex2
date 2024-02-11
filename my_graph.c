@@ -4,9 +4,8 @@
 int main (){
 	int A[LENGTH][LENGTH];
 	char s = 'K';
-	char str [4]= {'E' ,'O' ,'S'};
 	int i ,j ;
-	while(s != 'D' || s != str){
+	while(s != 'D' && s != EOF){
 		scanf(" %c",&s);
 		if(s=='A'){
 			getNumbers(A);
@@ -19,6 +18,7 @@ int main (){
 			scanf(" %d %d",&i,&j);
 			shortest(A,i,j);
 		}
+
 	}
 	return 0;
 }

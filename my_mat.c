@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include "my_mat.h"
-#define LENGTH 3
 
 /*'A'*/
 void getNumbers(int A[LENGTH][LENGTH]){
 
 /*Receiving the input to the matrix*/	
 	for(int i=0;i<LENGTH;i++){
-		for(int j=0;j<LENGTH;j++){
-			scanf(" %d",&A[i][j]);
+		for(int j=0;j<LENGTH;j++){ 
+	
+				scanf(" %d",&A[i][j]);
+			
 		}
 	}
 /*Using dinamic programing with Floyd–Warshall_algorithm*/	
@@ -33,12 +34,16 @@ void getNumbers(int A[LENGTH][LENGTH]){
 }
 /*'B'*/
 void isPath(int A [LENGTH][LENGTH],int i,int j){
-	if (A[i][j]!=0){
+	{
+		if (A[i][j]!=0){
 		printf("True\n");
 	}
 	else{
 		printf("False\n");
 	}
+	
+	}
+	
 }
 /*'C'*/
 void shortest(int A [LENGTH][LENGTH],int i,int j){
