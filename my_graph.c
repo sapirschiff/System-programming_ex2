@@ -4,8 +4,9 @@
 int main (){
 	int A[LENGTH][LENGTH];
 	char s = 'K';
+	char str [4]= {'E' ,'O' ,'S'};
 	int i ,j ;
-	while(s != 'D' || s != 'E'+'O'+'S'){
+	while(s != 'D' || s != str){
 		scanf(" %c",&s);
 		if(s=='A'){
 			getNumbers(A);
