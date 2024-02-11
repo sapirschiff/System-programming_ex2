@@ -1,9 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h> 
 #define MAX_ITEMS 5
 #define MAX_WEIGHT 20
 
 int maximum (int x, int y);  // all the functions 
-int **create_matrix(int weights[], int values[]);
+int *create_matrix(int weights[], int values[],int selected_bool[]);
 int* Items_in_bag(int **matrix, int values[], int selected_bool[]);
 int knapSack(int weights[], int values[], int selected_bool[]);
 
@@ -30,7 +31,7 @@ int maximum (int x, int y){ // find the maximum
     }
 }
 
-int **create_matrix(int weights[], int values[]){
+int *create_matrix(int weights[], int values[], int selected_bool[]){
     int **create_matrix = (int**) malloc ((MAX_WEIGHT+1)* sizeof(int*));  // make matrix 
 
     for (int i = 0; i < MAX_WEIGHT+1; i++)
@@ -52,7 +53,7 @@ int **create_matrix(int weights[], int values[]){
         }
     }
 
-    int *new_selected_bool = Items_in_bag(create_matrix, values , new_selected_bool);
+    int *new_selected_bool = Items_in_bag(create_matrix, values ,selected_bool);
 
     // Free allocated memory for the matrix
     for (int i = 0; i < MAX_ITEMS + 1; ++i) {
@@ -97,7 +98,8 @@ int main(){
     int weights [MAX_ITEMS];
     int values [MAX_ITEMS];
     int selected_bool [MAX_ITEMS];
-    for (int i =0; i<<MAX_ITEMS; i++){
+
+    for (int i =0; i<MAX_ITEMS; i++){
         printf ("the type of the weight %c :", 'A'+i);
         scanf("%d", &weights[i]);
 
@@ -105,8 +107,9 @@ int main(){
         scanf("%d" , &values[i]);
 
     }
+    
     int  maxValue = knapSack(weights, values, selected_bool);
-    int *new_selected_bool = make_matrix(weights, values, selected_bool);  // Stores the selected bool which determins which items to take
+    int *new_selected_bool = create_matrix(weights, values, selected_bool);  // Stores the selected bool which determins which items to take
 
     // Add the items to the result list
     int x = 0;
@@ -121,11 +124,11 @@ int main(){
 
     // Print
     printf("Maximum profit: %d\n", maxValue);   // the print
-    printf("Items that give the maximum profit: [");
+    printf("Selected items: ");
 
     for (int j = 0; j < x; j++) {
-        printf("%c%s", result[j], (j < x - 1) ? ", " : "");
+        printf("%c", result[j]);
     }
-    printf("]\n");
+
     return 0;
 }
