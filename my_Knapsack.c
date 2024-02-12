@@ -57,7 +57,6 @@ int* create_matrix(int weights[], int values[], int selected_bool[]){
             {
                 create_matrix[i][j] = maximum (create_matrix[i-1][j] , (create_matrix[i-1][j-weights[i-1]]+values[i-1]) );// find the max
             }
-            printf("%d",create_matrix[i][j]);
         }
     }
 
