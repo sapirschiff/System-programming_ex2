@@ -1,4 +1,4 @@
-#define LENGTH 3
+#define LENGTH 10
 #ifndef MY_MAT_H
 
 /*part A*/

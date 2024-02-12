@@ -31,16 +31,49 @@ int maximum (int x, int y){ // find the maximum
     }
 }
 
-int *create_matrix(int weights[], int values[], int selected_bool[]){
-    int **create_matrix = (int**) malloc ((MAX_WEIGHT+1)* sizeof(int*));  // make matrix 
+// int *create_matrix(int weights[], int values[], int selected_bool[]){
 
-    for (int i = 0; i < MAX_WEIGHT+1; i++)
+//     int **create_matrix = (int**) malloc ((MAX_WEIGHT+1)* sizeof(int*));  // make matrix 
+
+//     for (int i = 0; i < MAX_WEIGHT+1; i++)
+//     {
+//         create_matrix[i] = (int*) malloc (MAX_ITEMS* sizeof(int*));
+//     }
+
+//     for (int i =0; i<MAX_ITEMS+1; i++){
+//         for(int j =0; j<MAX_WEIGHT+1; j++){ // if the row and colon is 0 so put there 0
+
+//             if (i == 0 || j==0){
+//                 create_matrix[i][j] = 0 ;
+//             }
+
+//             else 
+//             {
+//                 create_matrix[i][j] = maximum (create_matrix[i-1][j] , (create_matrix[i-1][j-weights[i-1]]+values[i-1]) );// find the max
+//             }
+//         }
+//     }
+
+//     int *Nselected = bag(create_matrix, values ,selected_bool);
+
+//     // Free allocated memory for the matrix
+//     for (int i = 0; i < MAX_ITEMS + 1; ++i) {
+//         free(create_matrix[i]);
+//     }
+//     free(create_matrix); // free
+
+//     return Nselected;
+// }
+int *create_matrix(int weights[], int values[], int selected_bool[]){
+    int **create_matrix = (int**) malloc ((MAX_ITEMS + 1) * sizeof(int*));  // make matrix 
+
+    for (int i = 0; i < MAX_ITEMS + 1; i++)
     {
-        create_matrix[i] = (int*) malloc (MAX_ITEMS* sizeof(int*));
+        create_matrix[i] = (int*) malloc ((MAX_WEIGHT + 1) * sizeof(int));
     }
 
-    for (int i =0; i<MAX_ITEMS+1; i++){
-        for(int j =0; j<MAX_WEIGHT+1; j++){ // if the row and colon is 0 so put there 0
+    for (int i = 0; i < MAX_ITEMS + 1; i++){
+        for(int j = 0; j < MAX_WEIGHT + 1; j++){ // if the row and colon is 0 so put there 0
 
             if (i == 0 || j==0){
                 create_matrix[i][j] = 0 ;
