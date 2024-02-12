@@ -5,7 +5,7 @@
 
 int maximum (int x, int y);  // all the functions 
 int *create_matrix(int weights[], int values[],int selected_bool[]);
-int* Items_in_bag(int **matrix, int values[], int selected_bool[]);
+int* bag(int **matrix, int values[], int selected_bool[]);
 int knapSack(int weights[], int values[], int selected_bool[]);
 
 
@@ -13,9 +13,9 @@ int knapSack(int weights[], int values[], int selected_bool[]){  //in the loop m
    int maxV = 0;
     for (int i = 0; i < MAX_ITEMS; i++)
     {
-        if (selected_bool[i])
+        if (selected_bool[i]) // if the items choce
         {
-            maxV = maxV + values[i];
+            maxV = maxV + values[i];  // colculate the max value in the bag 
         }
     }
     return maxV;
@@ -53,7 +53,7 @@ int *create_matrix(int weights[], int values[], int selected_bool[]){
         }
     }
 
-    int *new_selected_bool = Items_in_bag(create_matrix, values ,selected_bool);
+    int *Nselected = bag(create_matrix, values ,selected_bool);
 
     // Free allocated memory for the matrix
     for (int i = 0; i < MAX_ITEMS + 1; ++i) {
@@ -61,33 +61,33 @@ int *create_matrix(int weights[], int values[], int selected_bool[]){
     }
     free(create_matrix); // free
 
-    return new_selected_bool;
+    return Nselected;
 }
 
-int* Items_in_bag(int **matrix, int values[], int selected_bool[]){
+int* bag(int **matrix, int values[], int selected_bool[]){
 
-    int Current_val = matrix[MAX_ITEMS][MAX_WEIGHT]; // the max value
+    int val = matrix[MAX_ITEMS][MAX_WEIGHT]; // the max value
     
     for (int y = MAX_ITEMS; y > 0; y--)  // start from the left
-    {
-        int b = 0;
-        for (int i = 0; i < MAX_WEIGHT + 1; i++)
+    { 
+        int s = 0;
+        for (int w = 0; w < MAX_WEIGHT + 1; w++)
         {
-            if (matrix[y-1][i] == Current_val)
+            if (matrix[y-1][w] == val)
             {
-                b = 1;  //true meaning that there is the same weight in the row above
+                s = 1;  //true meaning that there is the same weight in the row above
                 break;
             }
         }
 
-        if (b)  // infinity loop 
+        if (s)  // infinity loop 
         {
             selected_bool[y-1] = 0;  // y-1 in the list = y in the matrix
         }
         else
         {
             selected_bool[y-1] = 1;  // Add true to list
-            Current_val = Current_val - values[y-1];  // Update the value
+            val = val - values[y-1];  // Update the value
         }
     }
     return selected_bool;
@@ -99,36 +99,28 @@ int main(){
     int values [MAX_ITEMS];
     int selected_bool [MAX_ITEMS];
 
-    for (int i =0; i<MAX_ITEMS; i++){
-        printf ("the type of the weight %c :", 'A'+i);
-        scanf("%d", &weights[i]);
+     for (int i = 0; i < MAX_ITEMS; i++) {
 
-        printf ("the type of the value %c :", 'A'+i);
-        scanf("%d" , &values[i]);
-
+        scanf(" %c", &result[i]); // the itemts to results
+        scanf(" %d", &values[i]); // the value of th items
+        scanf(" %d", &weights[i]); // the weights of the items
     }
+
     
     int  maxValue = knapSack(weights, values, selected_bool);
-    int *new_selected_bool = create_matrix(weights, values, selected_bool);  // Stores the selected bool which determins which items to take
-
-    // Add the items to the result list
-    int x = 0;
-    for (int i = 0; i < MAX_ITEMS; i++)
-    {
-        if (new_selected_bool[i])   // When true add the item
-        {
-            result[x] = 'A' + i;     // i + 65 = {A,B,C,D,....}
-            x++;
-        } 
-    }
+    int *Nselected = create_matrix(weights, values, selected_bool);  // call to the new selected
 
     // Print
     printf("Maximum profit: %d\n", maxValue);   // the print
-    printf("Selected items: ");
+    printf("Selected items:");
 
-    for (int j = 0; j < x; j++) {
-        printf("%c", result[j]);
+    for (int j = 0; j < MAX_ITEMS; j++) {
+
+        if (Nselected[j])   // When true print item
+        {
+            printf(" %c", result[j]);
+        } 
     }
-
+    
     return 0;
 }

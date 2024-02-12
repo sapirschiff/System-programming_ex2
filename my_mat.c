@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "my_mat.h"
+#include <math.h>
 
 /*'A'*/
 void getNumbers(int A[LENGTH][LENGTH]){
@@ -12,6 +13,7 @@ void getNumbers(int A[LENGTH][LENGTH]){
 			
 		}
 	}
+
 /*Using dinamic programing with Floyd–Warshall_algorithm*/	
 	for(int k=0;k<LENGTH;k++){
 		for(int i=0;i<LENGTH;i++){
@@ -32,9 +34,10 @@ void getNumbers(int A[LENGTH][LENGTH]){
 		}	
 	}	
 }
+
 /*'B'*/
 void isPath(int A [LENGTH][LENGTH],int i,int j){
-	{
+	
 		if (A[i][j]!=0){
 		printf("True\n");
 	}
@@ -42,9 +45,8 @@ void isPath(int A [LENGTH][LENGTH],int i,int j){
 		printf("False\n");
 	}
 	
-	}
-	
 }
+
 /*'C'*/
 void shortest(int A [LENGTH][LENGTH],int i,int j){
 	if(A[i][j] == 0){
